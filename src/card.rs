@@ -1,11 +1,12 @@
 use std::{fmt, string, char, str};
 use std::str::FromStr;
+use itertools::Itertools;
 
-const SUITS: [char; 4] = ['♡', '♠', '♢', '♣'];
+pub const SUITS: [char; 4] = ['♡', '♠', '♢', '♣'];
 
-const RANKS: [char; 13] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
+pub const RANKS: [char; 13] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
 
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
 pub struct Card {
     pub mask: i32, // make private?
     pub suit: char,
@@ -68,6 +69,10 @@ impl FromStr for Card {
             s.chars().nth(1).unwrap(),
         ))
     }
+}
+
+pub fn deck() -> Vec<Card> {
+    RANKS.iter().cartesian_product(SUITS.iter()).map(|rs| Card::from_chars(*rs.0, *rs.1)).collect()
 }
 
 #[cfg(test)]
@@ -223,12 +228,17 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_card_from_str_2() {
-        Card::from_str("A♡X");
+        Card::from_str("A♡X").unwrap();
     }
 
     #[test]
     #[should_panic]
     fn test_card_from_str_3() {
-        Card::from_str("A");
+        Card::from_str("A").unwrap();
+    }
+
+    #[test]
+    fn test_deck_1() {
+        assert_eq!(deck().len(), 52);
     }
 }
