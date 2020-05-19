@@ -1,7 +1,6 @@
 use crate::card::{Card};
 use crate::hand::{Show};
 use itertools::Itertools;
-use std::marker::Copy;
 
 fn isfifteen(cs: &[Card]) -> bool {
     let mut t: i32 = 0;
@@ -18,14 +17,13 @@ pub trait Fifteen {
         let mut t: i32 = 0;
         let cards = self.all_cards();
 
-        // TODO work out how to look over multiple combination lengths
-        // for n in 2..5 {
-        for xs in cards.into_iter().combinations(2) {
-            if isfifteen(&xs) {
-                t += 2
+        for n in 2..5 {
+            for xs in cards.iter().cloned().combinations(n) {
+                if isfifteen(&xs) {
+                    t += 2
+                }
             }
         }
-        // }
         t
     }
 }
@@ -50,7 +48,7 @@ mod tests {
     #[test]
     fn test_score_fifteens_1() {
         let h = Show::new(["2♡", "3♡", "5♡", "T♡"], "5♣");
-        assert_eq!(h.score_fifteens(), 6)
+        assert_eq!(h.score_fifteens(), 8)
     }
 
     #[test]
