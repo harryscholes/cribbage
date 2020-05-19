@@ -3,7 +3,7 @@ use rand::{thread_rng, seq::{SliceRandom}};
 
 #[derive(Eq, PartialEq, Debug)]
 pub struct Hand {
-    hand: [Card; 4],
+    pub hand: [Card; 4],
 }
 
 impl Hand {
@@ -28,8 +28,8 @@ pub fn hand(cs: [&str; 4]) -> Hand {
 
 #[derive(Eq, PartialEq, Debug)]
 pub struct Show {
-    hand: Hand,
-    cut: Card,
+    pub hand: Hand,
+    pub cut: Card,
 }
 
 impl Show {
