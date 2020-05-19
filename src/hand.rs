@@ -9,13 +9,21 @@ pub struct Hand {
 impl Hand {
     pub fn new(cs: [&str; 4]) -> Self {
         Hand {
-            hand: [Card::new(cs[0]), Card::new(cs[1]), Card::new(cs[2]), Card::new(cs[3])]
+            hand: [
+                Card::new(cs[0]),
+                Card::new(cs[1]),
+                Card::new(cs[2]),
+                Card::new(cs[3]),
+            ]
         }
     }
 
     pub fn rand() -> Self {
         let mut rng = thread_rng();
-        let cs: Vec<Card> = deck().choose_multiple(&mut rng, 4).cloned().collect();
+        let cs: Vec<Card> = deck()
+            .choose_multiple(&mut rng, 4)
+            .cloned()
+            .collect();
         Hand {
             hand: [cs[0], cs[1], cs[2], cs[3]]
         }
@@ -42,7 +50,10 @@ impl Show {
 
     pub fn rand() -> Self {
         let mut rng = thread_rng();
-        let cs: Vec<Card> = deck().choose_multiple(&mut rng, 5).cloned().collect();
+        let cs: Vec<Card> = deck()
+            .choose_multiple(&mut rng, 5)
+            .cloned()
+            .collect();
         Show {
             hand: Hand {
                 hand: [cs[0], cs[1], cs[2], cs[3]]
