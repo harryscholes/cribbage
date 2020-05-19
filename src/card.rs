@@ -30,10 +30,10 @@ pub const RANKS: [char; 13] = [
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
 pub struct Card {
-    pub mask: i32, // make private?
+    pub mask: i32,
     pub suit: char,
     pub rank: char,
-    pub value: i32, // make private?
+    pub value: i32,
 }
 
 impl Card {
@@ -95,7 +95,11 @@ impl FromStr for Card {
 }
 
 pub fn deck() -> Vec<Card> {
-    RANKS.iter().cartesian_product(SUITS.iter()).map(|rs| Card::from_chars(*rs.0, *rs.1)).collect()
+    RANKS
+        .iter()
+        .cartesian_product(SUITS.iter())
+        .map(|rs| Card::from_chars(*rs.0, *rs.1))
+        .collect()
 }
 
 #[cfg(test)]
