@@ -22,9 +22,10 @@ impl Card {
             panic!("Invalid `suit`");
         };
         let mask = RANKS.iter().position(|x| x == &rank).unwrap() as i32;
-        let value = match mask > 10 {
+        let value = mask + 1;
+        let value = match value > 10 {
             true => 10,
-            _ => mask.clone(),
+            _ => value
         };
         Self {
             mask,
