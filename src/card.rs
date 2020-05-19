@@ -2,9 +2,31 @@ use std::{fmt, string, char, str};
 use std::str::FromStr;
 use itertools::Itertools;
 
-pub const SUITS: [char; 4] = ['♡', '♠', '♢', '♣'];
+pub const SUITS: [char; 4] = [
+    '♡',
+    '♠',
+    '♢',
+    '♣',
+];
 
-pub const RANKS: [char; 13] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'];
+pub const RANKS: [char; 13] = [
+// rank,    value,  mask,
+    'A', //     1,     0,
+    '2', //     2,     1,
+    '3', //     3,     2,
+    '4', //     4,     3,
+    '5', //     5,     4,
+    '6', //     6,     5,
+    '7', //     7,     6,
+    '8', //     8,     7,
+    '9', //     9,     8,
+    'T', //    10,     9,
+    'J', //    10,    10,
+    'Q', //    10,    11,
+    'K', //    10,    12,
+// Ace high:
+//  'A',        1,    13,
+];
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Copy)]
 pub struct Card {
@@ -22,9 +44,10 @@ impl Card {
             panic!("Invalid `suit`");
         };
         let mask = RANKS.iter().position(|x| x == &rank).unwrap() as i32;
-        let value = match mask > 10 {
+        let value = mask + 1;
+        let value = match value > 10 {
             true => 10,
-            _ => mask.clone(),
+            _ => value
         };
         Self {
             mask,
