@@ -66,14 +66,14 @@ mod tests {
 
     #[test]
     fn test_hand_constructor_1() {
-        Hand::new(&vec!["2♡", "3♡", "4♡", "5♡"]);
+        Hand::new(&["2♡", "3♡", "4♡", "5♡"]);
     }
 
     #[test]
     fn test_hand_equality_1() {
         assert_eq!(
             Hand::new(&vec!["2♡", "3♡", "4♡", "5♡"]),
-            Hand::new(&vec!["2♡", "3♡", "4♡", "5♡"]),
+            Hand::new(&["2♡", "3♡", "4♡", "5♡"]),
         );
     }
 
@@ -88,7 +88,7 @@ mod tests {
     #[test]
     fn test_hand_fn_1() {
         assert_eq!(
-            hand(&vec!["2♡", "3♡", "4♡", "5♡"]),
+            hand(&["2♡", "3♡", "4♡", "5♡"]),
             Hand::new(&vec!["2♡", "3♡", "4♡", "5♡"]),
         );
     }
@@ -100,10 +100,10 @@ mod tests {
 
     #[test]
     fn test_show_constructor_2() {
-        let s = Show::new(&vec!["2♡", "3♡", "4♡", "5♡"], "6♡");
+        let s = Show::new(&["2♡", "3♡", "4♡", "5♡"], "6♡");
         assert_eq!(
             s.hand,
-            Hand::new(&vec!["2♡", "3♡", "4♡", "5♡"]),
+            Hand::new(&["2♡", "3♡", "4♡", "5♡"]),
         )
     }
 
