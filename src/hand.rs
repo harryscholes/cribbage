@@ -1,5 +1,11 @@
-use crate::card::{Card, deck};
-use rand::{thread_rng, seq::{SliceRandom}};
+use crate::card::{
+    Card,
+    deck,
+};
+use rand::{
+    thread_rng,
+    seq::{SliceRandom}, // `choose_multiple`
+};
 
 #[derive(Eq, PartialEq, Debug)]
 pub struct Hand {
@@ -12,7 +18,10 @@ impl Hand {
             panic!("`Hand` must contain four `Card`s")
         }
         Hand {
-            hand: cs.iter().map(|x| Card::new(x)).collect()
+            hand: cs
+                .iter()
+                .map(|x| Card::new(x))
+                .collect()
         }
     }
 

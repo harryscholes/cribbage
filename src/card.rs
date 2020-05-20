@@ -1,7 +1,13 @@
-use std::{fmt, string, char, str};
+use std::{
+    fmt,
+    string,
+    char,
+    str,
+};
 use std::str::FromStr;
 use itertools::Itertools;
 
+// TODO allow ['H', 'S', 'D', 'C']
 pub const SUITS: [char; 4] = [
     '♡',
     '♠',
