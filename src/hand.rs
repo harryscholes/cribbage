@@ -37,7 +37,7 @@ impl Hand {
 }
 
 pub fn hand(cs: &[&str]) -> Hand {
-    Hand::new(&cs)
+    Hand::new(cs)
 }
 
 #[derive(Eq, PartialEq, Debug)]
