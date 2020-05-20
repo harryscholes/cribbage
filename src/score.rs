@@ -1,6 +1,12 @@
-use crate::card::{Card};
-use crate::hand::{Show};
+use crate::card::Card;
+use crate::hand::Show;
 use itertools::Itertools;
+
+fn cards(s: &Show) -> Vec<Card> {
+    let mut cs = s.hand.hand.to_vec();
+    cs.push(s.cut);
+    return cs
+}
 
 fn is_fifteen(cs: &[Card]) -> bool {
     let mut t = 0;
@@ -11,14 +17,12 @@ fn is_fifteen(cs: &[Card]) -> bool {
 }
 
 pub trait Fifteens {
-    fn all_cards(&self) -> Vec<Card>;
+    fn cards(&self) -> Vec<Card>;
 
     fn score_fifteens(&self) -> i32 {
         let mut t: i32 = 0;
-        let cards = self.all_cards();
-
         for n in 2..5 {
-            for xs in cards.iter().cloned().combinations(n) {
+            for xs in self.cards().iter().cloned().combinations(n) {
                 if is_fifteen(&xs) {
                     t += 2
                 }
@@ -29,10 +33,8 @@ pub trait Fifteens {
 }
 
 impl Fifteens for Show {
-    fn all_cards(&self) -> Vec<Card> {
-        let mut cs = self.hand.hand.to_vec();
-        cs.push(self.cut);
-        return cs
+    fn cards(&self) -> Vec<Card> {
+        cards(self)
     }
 }
 
@@ -47,7 +49,7 @@ mod tests {
 
     #[test]
     fn test_score_fifteens_1() {
-        let h = Show::new(["2♡", "3♡", "5♡", "T♡"], "5♣");
+        let h = Show::new(&vec!["2♡", "3♡", "5♡", "T♡"], "5♣");
         assert_eq!(h.score_fifteens(), 8)
     }
 
@@ -165,10 +167,10 @@ mod tests {
     }
 
     #[test]
-    fn test_Show_Fifteens_all_cards() {
-        let s = Show::new(["2♡", "3♡", "4♡", "5♡"], "6♡");
+    fn test_show_fifteens_cards() {
+        let s = Show::new(&vec!["2♡", "3♡", "4♡", "5♡"], "6♡");
         assert_eq!(
-            s.all_cards(),
+            s.cards(),
             vec!["2♡", "3♡", "4♡", "5♡", "6♡"]
                 .iter()
                 .map(|x| Card::from_str(x).unwrap())
