@@ -47,7 +47,7 @@ mod tests {
 
     #[test]
     fn test_score_fifteens_1() {
-        let h = Show::new(["2♡", "3♡", "5♡", "T♡"], "5♣");
+        let h = Show::new(&vec!["2♡", "3♡", "5♡", "T♡"], "5♣");
         assert_eq!(h.score_fifteens(), 8)
     }
 
@@ -166,7 +166,7 @@ mod tests {
 
     #[test]
     fn test_Show_Fifteens_all_cards() {
-        let s = Show::new(["2♡", "3♡", "4♡", "5♡"], "6♡");
+        let s = Show::new(&vec!["2♡", "3♡", "4♡", "5♡"], "6♡");
         assert_eq!(
             s.all_cards(),
             vec!["2♡", "3♡", "4♡", "5♡", "6♡"]
