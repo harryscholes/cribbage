@@ -1,5 +1,5 @@
-use crate::card::{Card};
-use crate::hand::{Show};
+use crate::card::Card;
+use crate::hand::Show;
 use itertools::Itertools;
 
 fn cards(s: &Show) -> Vec<Card> {

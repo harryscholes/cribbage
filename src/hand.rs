@@ -4,7 +4,7 @@ use crate::card::{
 };
 use rand::{
     thread_rng,
-    seq::{SliceRandom}, // `choose_multiple`
+    seq::SliceRandom, // `choose_multiple`
 };
 
 #[derive(Eq, PartialEq, Debug)]
